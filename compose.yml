@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: partyqueue-backend
+    env_file:
+      - ./env/.env
+    volumes:
+      - ./sqlite:/app/sqlite
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: partyqueue-frontend
+    restart: unless-stopped
+
+  reverse-proxy:
+    image: caddy:2
+    container_name: partyqueue-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./reverse-proxy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+      - frontend
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

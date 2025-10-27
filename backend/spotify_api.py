@@ -11,6 +11,7 @@ from json import JSONDecodeError
 from dataclasses import dataclass
 from typing import List, Optional, Dict, Any
 from urllib.parse import urlencode
+from pathlib import Path
 
 import urllib.request
 import urllib.error
@@ -238,7 +239,10 @@ def _authorized_request(method: str, url: str, params: Optional[Dict[str, Any]] 
                 err_body = e.read().decode("utf-8")
             except Exception:
                 err_body = "<no body>"
-            logger.error("Spotify API error %s at %s: %s", status, full_url, err_body)
+            if status == 404 and "NO_ACTIVE_DEVICE" in err_body:
+                logger.warning("Failed adding song to spotify queue, because there is no active device. Please start playing music on any device assosiated with the account. URL: %s", full_url)
+            else:
+                logger.error("Spotify API error %s at %s: %s", status, full_url, err_body)
             return None
 
         except Exception as e:
