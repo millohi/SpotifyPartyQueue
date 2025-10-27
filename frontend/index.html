@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spotify Party Queue 🎶</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="script.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center">
+  <header class="bg-green-600 text-white w-full py-3 shadow-md flex items-center justify-between px-4">
+    <!-- Linke Seite (Platzhalter oder Logo) -->
+    <div class="w-6"></div>
+
+    <!-- Titel mittig -->
+    <h1 class="text-xl font-semibold text-center flex-grow select-none">
+      Spotify Party Queue 🎉
+    </h1>
+
+    <!-- Hilfe-Button rechts -->
+    <a href="help.html"
+       class="border-2 border-white text-white rounded-full px-2 py-1 text-lg font-medium hover:bg-white hover:text-green-700 transition flex items-center justify-center"
+       title="Hilfe anzeigen">
+      ❓
+      <span class="hidden sm:inline text-sm font-semibold ml-1">Hilfe</span>
+    </a>
+  </header>
+
+
+  <main class="flex flex-col items-center mt-4 w-full max-w-md p-3">
+    <!-- Add Song Section -->
+    <div class="w-full bg-white rounded-xl shadow p-4 mb-4">
+      <label for="song-link" class="block text-gray-700 font-semibold mb-2">Spotify-Link eingeben:</label>
+      <div class="flex gap-2">
+        <input id="song-link" type="text" placeholder="https://open.spotify.com/track/..."
+          class="flex-grow border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+        <button id="add-btn"
+          class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition">➕</button>
+      </div>
+    </div>
+
+    <!-- Queue Section -->
+    <div id="queue" class="w-full bg-white rounded-xl shadow p-4">
+      <h2 class="text-lg font-semibold mb-3 text-gray-800 text-center">Aktuelle Queue</h2>
+      <div id="queue-list" class="flex flex-col gap-3"></div>
+    </div>
+  </main>
+
+</body>
+</html>
