@@ -3,6 +3,7 @@ version: "3.9"
 services:
   backend:
     build: ./backend
+    init: true
     container_name: partyqueue-backend
     env_file:
       - ./env/.env
