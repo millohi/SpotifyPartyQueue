@@ -1,0 +1,25 @@
+camillo-dobrovsky.de {
+    encode gzip
+
+    # Frontend (statisch): an den frontend-Container
+    reverse_proxy frontend:80
+
+    # Backend: unter /api → FastAPI
+    handle_path /api* {
+        reverse_proxy backend:8000
+    }
+
+    # Security-Header (dezent)
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "no-referrer-when-downgrade"
+    }
+}
+
+# Optional: www → non-www
+www.camillo-dobrovsky.de {
+    redir https://camillo-dobrovsky.de{uri}
+}
+

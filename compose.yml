@@ -7,8 +7,11 @@ services:
     container_name: partyqueue-backend
     env_file:
       - ./env/.env
+    environment:
+      APP_ENV: production
+      DB_FILE: /app/sqlite/spotify_party_queue.sqlite3
     volumes:
-      - ./sqlite:/app/sqlite
+      - sqlite_data:/app/sqlite
     restart: unless-stopped
 
   frontend:
@@ -22,8 +25,10 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN}
     volumes:
-      - ./reverse-proxy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./reverse-proxy/old_Caddyfile:/etc/caddy/old_Caddyfile:ro
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
@@ -34,3 +39,4 @@ services:
 volumes:
   caddy_data:
   caddy_config:
+  sqlite_data:
