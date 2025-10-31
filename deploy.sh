@@ -69,8 +69,7 @@ SPOTIFY_REFRESH_TOKEN="$(ask_secret "SPOTIFY_REFRESH_TOKEN")"
 SPOTIFY_ACCESS_TOKEN="$(ask "SPOTIFY_ACCESS_TOKEN (leer lassen, wenn unbekannt)" "")"
 
 # --- DB-Pfad optional anpassen ------------------------------------------------
-DB_FILE_DEFAULT="/app/sqlite/spotify_party_queue.sqlite3"
-DB_FILE="$(ask "DB-Dateipfad im Container" "${DB_FILE_DEFAULT}")"
+DB_FILE="/app/sqlite/spotify_party_queue.sqlite3"
 
 # --- env/.env schreiben (nur Backend-ENV) ------------------------------------
 echo
@@ -102,7 +101,7 @@ else
   echo "DOMAIN=" > "${DOTENV_COMPOSE}"
 fi
 
-# --- old_Caddyfile erzeugen -------------------------------------------------------
+# --- Caddyfile erzeugen -------------------------------------------------------
 echo
 echo "== Schreibe ${CADDYFILE}"
 if [[ "${MODE}" == "1" ]]; then
@@ -160,7 +159,7 @@ if id -u appuser >/dev/null 2>&1; then
   sudo chown -R appuser:appuser "${SQLITE_DIR}" || true
 else
   # default: dem aktuellen User geben; Container-User ist evtl. non-root,
-  # Rechteproblem lässt sich mit named volume lösen (siehe Doku).
+  # Rechteproblem lässt sich mit named volume lösen.
   chmod 755 "${SQLITE_DIR}" || true
 fi
 
