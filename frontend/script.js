@@ -110,7 +110,7 @@ addBtn.addEventListener("click", async () => {
     await fetchQueue();
   } catch (err) {
     console.error("Add song error:", err);
-    alert("Song konnte nicht hinzugefügt werden.");
+    alert(err.message || "Song konnte nicht hinzugefügt werden.");
   }
 });
 

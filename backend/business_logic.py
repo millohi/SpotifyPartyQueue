@@ -31,19 +31,19 @@ def add_song_to_app_queue(song_id: str) -> bool:
     song = sp.search_song(song_id)
     if not song:
         # Could be removed/invalid track or API error.
-        raise Exception("Track not found on Spotify.")
+        raise Exception("Song konnte auf Spotify nicht gefunden werden. Prüfe, ob dieser korrekt ist!")
     print(song)
     last_played = db.add_song(song)
 
     # Reject if already in app queue
     if db.check_song_in_app_queue(song):
-        return False
+        raise Exception("Song bereits in der aktuellen Queue vorhanden!")
 
     # Reject if played within last 30 minutes (UTC)
     if last_played is not None:
         now_utc = datetime.now(timezone.utc)
         if now_utc - last_played < timedelta(minutes=30):
-            return False
+            raise Exception("Sorry, der Song wurde scheinbar erst vor kurzem gespielt. Alle wünschen sich den Song? Wende dich an die Person, welche Spotify abspielt!")
 
     # Otherwise, add to app queue
     return db.add_song_to_app_queue(song)
