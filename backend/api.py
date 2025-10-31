@@ -136,7 +136,7 @@ def add_song_to_app_queue(body: AddSongBody) -> bool:
     """
     track_id = extract_track_id(body.song_link)
     if not track_id:
-        raise HTTPException(status_code=400, detail="Invalid Spotify track link/URI.")
+        raise HTTPException(status_code=400, detail="Formatierung vom Spotify-Link ungültig!")
 
     try:
         ok = bl.add_song_to_app_queue(track_id)
