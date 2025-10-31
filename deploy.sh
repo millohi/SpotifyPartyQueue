@@ -65,9 +65,7 @@ echo
 echo "== Spotify API Zugangsdaten =="
 SPOTIFY_CLIENT_ID="$(ask "SPOTIFY_CLIENT_ID")"
 SPOTIFY_CLIENT_SECRET="$(ask_secret "SPOTIFY_CLIENT_SECRET")"
-echo
 SPOTIFY_REFRESH_TOKEN="$(ask_secret "SPOTIFY_REFRESH_TOKEN")"
-echo
 SPOTIFY_ACCESS_TOKEN="$(ask "SPOTIFY_ACCESS_TOKEN (leer lassen, wenn unbekannt)" "")"
 
 # --- DB-Pfad optional anpassen ------------------------------------------------
@@ -184,5 +182,5 @@ else
 fi
 
 echo
-echo "Logs (Proxy):  docker compose logs -f partyqueue-proxy"
-echo "Logs (Backend): docker compose logs -f partyqueue-backend"
+echo "Logs (Proxy):  docker compose logs -f reverse-proxy"
+echo "Logs (Backend): docker compose logs -f backend"
