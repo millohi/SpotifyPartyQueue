@@ -7,11 +7,11 @@ Participants can add tracks via Spotify URLs and vote on which songs should play
 - Search the song you want to add on Spotify. 
 - Click on the three dots and select share. 
 - Copy the link. 
-- Paste the Link at the SpotifyPartyQueue Search bar: 
+- Paste the Link at the SpotifyPartyQueue Search bar:  
 ![Suchleiste in SpotifyPartyQueue](imgs/search_bar.png)
 ### How to vote for a song? 
 - Search the song you would like to vote for in the "Aktuelle Queue" in the SpotifyPartyQueue (if it doesn't exist, add it like described before)
-- Select a smiley to vote (default vote is neutral). The number at the right indicates how what's the current total vote for the song is (higher is better)
+- Select a smiley to vote (default vote is neutral). The number at the right indicates how what's the current total vote for the song is (higher is better)  
 ![Vote in der SpotifyPartyQueue](imgs/vote_song.png)
 - The song at the top of the "Aktuelle Queue" will be added next to the spotify playing queue
 - You can change your vote at any time. 
