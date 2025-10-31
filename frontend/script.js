@@ -105,12 +105,26 @@ addBtn.addEventListener("click", async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ song_link: link })
     });
-    if (!res.ok) throw new Error(await res.text());
+    if (!res.ok) {
+      let message;
+      try {
+        // Versuche JSON zu lesen
+        const errorData = await res.json();
+        message = errorData.detail || errorData.message || JSON.stringify(errorData);
+      } catch {
+        // Wenn kein valides JSON, lese als Text
+        message = await res.text();
+      }
+      throw new Error(message);
+    }
+
     input.value = "";
     await fetchQueue();
   } catch (err) {
     console.error("Add song error:", err);
-    alert(err.message || "Song konnte nicht hinzugefügt werden.");
+    // Entferne geschweifte Klammern oder Anführungszeichen, falls noch vorhanden
+    const cleanMsg = err.message.replace(/^[{\["']+|[}\]"']+$/g, "");
+    alert(cleanMsg || "Song konnte nicht hinzugefügt werden.");
   }
 });
 
