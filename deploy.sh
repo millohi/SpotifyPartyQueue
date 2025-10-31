@@ -18,10 +18,14 @@ ask() { # $1=prompt, $2=default(optional)
 ask_secret() { # $1=prompt
   local prompt="$1"
   local answer
-  read -r -s -p "$prompt (wird nicht angezeigt): " answer || true
-  echo
-  echo "$answer"
+  read -r -s -p "$prompt (wird nicht angezeigt): " answer
+  printf '\n' >&2                 # nur fürs Terminal
+  # Zeilenumbrüche/CR entfernen, nur den Wert ausgeben
+  answer="${answer//$'\r'/}"
+  answer="${answer//$'\n'/}"
+  printf '%s' "$answer"
 }
+
 
 require_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "Fehlt: $1"; exit 1; }; }
 
@@ -61,7 +65,9 @@ echo
 echo "== Spotify API Zugangsdaten =="
 SPOTIFY_CLIENT_ID="$(ask "SPOTIFY_CLIENT_ID")"
 SPOTIFY_CLIENT_SECRET="$(ask_secret "SPOTIFY_CLIENT_SECRET")"
+echo
 SPOTIFY_REFRESH_TOKEN="$(ask_secret "SPOTIFY_REFRESH_TOKEN")"
+echo
 SPOTIFY_ACCESS_TOKEN="$(ask "SPOTIFY_ACCESS_TOKEN (leer lassen, wenn unbekannt)" "")"
 
 # --- DB-Pfad optional anpassen ------------------------------------------------
@@ -178,5 +184,5 @@ else
 fi
 
 echo
-echo "Logs (Proxy):  docker compose logs -f reverse-proxy"
-echo "Logs (Backend): docker compose logs -f backend"
+echo "Logs (Proxy):  docker compose logs -f partyqueue-proxy"
+echo "Logs (Backend): docker compose logs -f partyqueue-backend"
