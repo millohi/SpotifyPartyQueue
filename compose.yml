@@ -28,7 +28,7 @@ services:
     environment:
       - DOMAIN=${DOMAIN}
     volumes:
-      - ./reverse-proxy/old_Caddyfile:/etc/caddy/old_Caddyfile:ro
+      - ./reverse-proxy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
