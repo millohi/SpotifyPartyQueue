@@ -17,7 +17,7 @@ Participants can add tracks via Spotify URLs and vote on which songs should play
 - You can change your vote at any time. 
 
 ## Setup
-You need to Setup the spotify-API for your account and the server which hosts front- and backend. The application will start working as soon as you play songs on any device. You can e.g. play a "basic playlist" and users can add special songs/wishes throw the SpotifyPartyQueue. 
+You need to Setup the spotify-API for your account and the server which hosts front- and backend. The application will start working as soon as you play songs on any device. You can e.g. play a "basic playlist" and users can add special songs/wishes through the SpotifyPartyQueue. 
 ### Spotify-API-Access
 **Requirements:**
 - Spotify Premium Account
